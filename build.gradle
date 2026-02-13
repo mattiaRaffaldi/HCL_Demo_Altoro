@@ -1,7 +1,6 @@
 
 apply plugin: 'war'
 
-webAppDirName = 'WebContent'
 sourceCompatibility = "1.7"; 
 targetCompatibility = "1.7";
 
@@ -21,8 +20,8 @@ sourceSets {
 }
 
 dependencies {
-	compile \
-		fileTree(dir: "${webAppDirName}/WEB-INF/lib", include: '*.jar'),
+	implementation \
+		fileTree(dir: "WebContent/WEB-INF/lib", include: '*.jar'),
 		'commons-codec:commons-codec:1.6',
 		'commons-lang:commons-lang:2.5',
 		'com.hynnet:commons-lang3:3.3.2',
@@ -32,12 +31,13 @@ dependencies {
 		'org.glassfish.jersey.inject:jersey-hk2:2.27',
 		'log4j:log4j:1.2.16',
 		'org.apache.wink:wink-json4j:1.4'
-	providedCompile \
+	compileOnly \
 		'javax:javaee-api:7.0'
 }
 
 war {
-	archiveName 'altoromutual.war'
+	webAppDirectory = file('WebContent')
+	archiveFileName = 'altoromutual.war'
 	exclude 'WEB-INF/classes/**/*.class'
 	exclude 'WEB-INF/lib/**/*.jar'
 }
